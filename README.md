@@ -1,5 +1,8 @@
 # Gaussian Mixture VAE with Contrastive Learning for Multi-Label Classification (C-GMVAE)
-The implementation of C-GMVAE using PyTorch.
+
+<div align=center><img src="figs/cdsvae.png" width="70%"></div>
+
+The implementation of [C-GMVAE](https://arxiv.org/abs/2112.00976) using PyTorch.
 
 # Sample Dataset
 We use mirflickr as our running example since it is commonly used and has a moderate size. Dataset location: data/mirflickr
