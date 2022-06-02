@@ -1,6 +1,6 @@
 # Gaussian Mixture VAE with Contrastive Learning for Multi-Label Classification (C-GMVAE)
 
-<div align=center><img src="figs/c-gmvae.png" width="70%"></div>
+<div align=center><img src="figs/c-gmvae.png" width="95%"></div>
 
 The implementation of [C-GMVAE](https://arxiv.org/abs/2112.00976) using PyTorch.
 
