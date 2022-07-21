@@ -29,11 +29,12 @@ The seed is 1 by default, but can be changed in the bash file.
 If you find our work interesting, please consider citing the following paper:
 
 ```bibtex
-@article{bai2022gaussian,
+@inproceedings{bai2022gaussian,
   title={Gaussian Mixture Variational Autoencoder with Contrastive Learning for Multi-Label Classification},
   author={Bai, Junwen and Kong, Shufeng and Gomes, Carla P},
-  journal={International Conference on Machine Learning},
-  volume={},
-  year={2022}
+  booktitle={International Conference on Machine Learning},
+  pages={1383--1398},
+  year={2022},
+  organization={PMLR}
 }
 ```
