@@ -212,8 +212,10 @@ def train(args):
                 macro_f1 = smooth_macro_f1 / float(args.check_freq)
                 micro_f1 = smooth_micro_f1 / float(args.check_freq)
                 
-                temp_pred_x = np.reshape(np.array(temp_pred_x), (-1))
-                temp_label = np.reshape(np.array(temp_label), (-1))
+                temp_pred_x = [v.cpu().detach().numpy()  for v in temp_pred_x]
+                temp_label = [v.cpu().detach().numpy()  for v in temp_label]
+                temp_pred_x = np.reshape(np.array(temp_pred_x, dtype=object), (-1))
+                temp_label = np.reshape(np.array(temp_label, dtype=object), (-1))
                 
                 time_str = datetime.datetime.now().isoformat()
                 print("step=%d  %s\nmacro_f1=%.6f, micro_f1=%.6f\nnll_loss=%.6f\tnll_loss_x=%.6f\nc_loss=%.6f\tc_loss_x=%.6f\tkl_loss=%.6f\tcpc_loss=%.6f\nlatent_cpc_loss=%.6f\tfeat_recon_loss=%.6f\ttotal_loss=%.6f\n" % (
