@@ -38,3 +38,7 @@ If you find our work interesting, please consider citing the following paper:
   organization={PMLR}
 }
 ```
+
+## Related Repo
+
+[MPVAE](https://github.com/JunwenBai/MPVAE)
