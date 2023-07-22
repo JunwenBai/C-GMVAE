@@ -21,8 +21,8 @@ def test(args):
     #print(labels.sum(0))
 
     print('building network...')
-    vae = VAE(args).to(device)
-    vae.load_state_dict(torch.load(args.checkpoint_path))
+    vae = VAE(args)
+    vae.load_state_dict(torch.load(args.checkpoint_path, map_location=device))
     vae.eval()
 
     print("loaded model: %s" % (args.checkpoint_path))
@@ -59,13 +59,13 @@ def test(args):
 
             with torch.no_grad():
                 output = vae(input_label, input_feat) 
-                total_loss, nll_loss, nll_loss_x, c_loss, c_loss_x, kl_loss, cpc_loss, _, _,  _, pred_x = compute_loss(input_label, output, args)
+                total_loss, nll_loss, nll_loss_x, c_loss, c_loss_x, kl_loss, cpc_loss, _, pred_x = compute_loss(input_label, output, args)
 
             all_nll_loss += nll_loss*(end-start)
             all_c_loss += c_loss*(end-start)
             all_total_loss += total_loss*(end-start)
 
-            if (all_pred_x == []):
+            if len(all_pred_x) == 0: 
                 all_pred_x = pred_x.cpu().data.numpy()
                 all_label = input_label.cpu().data.numpy()
                 all_feat_mu = output['fx_mu'].cpu().data.numpy()
