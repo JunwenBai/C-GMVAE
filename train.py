@@ -177,8 +177,8 @@ def train(args):
             if args.residue_sigma == "random":
                 pass
             else:
-                total_loss, nll_loss, nll_loss_x, c_loss, c_loss_x, kl_loss, cpc_loss, latent_cpc_loss, feat_recon_loss, _, pred_x = compute_loss(
-                        input_label, output, args, one_epoch, class_weights)
+                total_loss, nll_loss, nll_loss_x, c_loss, c_loss_x, kl_loss, cpc_loss, _, pred_x = \
+                    compute_loss(input_label, output, args)
 
             total_loss.backward()
             optimizer.step()
@@ -218,8 +218,8 @@ def train(args):
                 temp_label = np.reshape(np.array(temp_label, dtype=object), (-1))
                 
                 time_str = datetime.datetime.now().isoformat()
-                print("step=%d  %s\nmacro_f1=%.6f, micro_f1=%.6f\nnll_loss=%.6f\tnll_loss_x=%.6f\nc_loss=%.6f\tc_loss_x=%.6f\tkl_loss=%.6f\tcpc_loss=%.6f\nlatent_cpc_loss=%.6f\tfeat_recon_loss=%.6f\ttotal_loss=%.6f\n" % (
-                    current_step, time_str, macro_f1, micro_f1, nll_loss*args.nll_coeff, nll_loss_x*args.nll_coeff, c_loss*args.c_coeff, c_loss_x*args.c_coeff, kl_loss, cpc_loss, latent_cpc_loss, feat_recon_loss, total_loss))
+                print("step=%d  %s\nmacro_f1=%.6f, micro_f1=%.6f\nnll_loss=%.6f\tnll_loss_x=%.6f\nc_loss=%.6f\tc_loss_x=%.6f\tkl_loss=%.6f\tcpc_loss=%.6f\ttotal_loss=%.6f\n" % (
+                    current_step, time_str, macro_f1, micro_f1, nll_loss*args.nll_coeff, nll_loss_x*args.nll_coeff, c_loss*args.c_coeff, c_loss_x*args.c_coeff, kl_loss, cpc_loss, total_loss))
                 temp_pred_x=[]
                 temp_label=[]
 
@@ -308,8 +308,8 @@ def valid(data, vae, summary_writer, valid_idx, current_step, args, extra=None):
 
         with torch.no_grad():
             output = vae(input_label, input_feat) 
-            total_loss, nll_loss, nll_loss_x, c_loss, c_loss_x, kl_loss, cpc_loss, latent_cpc_loss, feat_recon_loss, pred_e, pred_x = compute_loss(
-                    input_label, output, args)
+            total_loss, nll_loss, nll_loss_x, c_loss, c_loss_x, kl_loss, cpc_loss, pred_e, pred_x = \
+                compute_loss(input_label, output, args)
     
         all_nll_loss += nll_loss*(end-start)
         all_c_loss += c_loss*(end-start)
